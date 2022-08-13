@@ -9,12 +9,10 @@ class Controls{
             case "KEYS":
                 this.#addKeyboardListeners();
                 break;
-            case "DUMMY":
-                this.forward=true;
-                break;
         }
     }
 
+    // funcao que verifica qual tecla foi pressionada e atualiza o estado do carro
     #addKeyboardListeners(){
         document.onkeydown=(event)=>{
             switch(event.key){
@@ -24,9 +22,6 @@ class Controls{
                 case "ArrowRight":
                     this.right=true;
                     break;
-                // case "ArrowUp":
-                //     this.forward=true;
-                //     break;
                 case "ArrowDown":
                     this.reverse=true;
                     break;
@@ -40,9 +35,6 @@ class Controls{
                 case "ArrowRight":
                     this.right=false;
                     break;
-                // case "ArrowUp":
-                //     this.forward=false;
-                //     break;
                 case "ArrowDown":
                     this.reverse=false;
                     break;

@@ -1,21 +1,23 @@
+// pega os elementos do html e atribui a variavel
 const carCanvas=document.getElementById("carCanvas");
 const scoreValue=document.getElementById("scoreValue");
 carCanvas.width=200;
 
+// cria o contexto do canvas, a estrada e o carro principal
 const carCtx = carCanvas.getContext("2d");
 const road=new Road(carCanvas.width/2,carCanvas.width*0.9);
 const car=new Car(road.getLaneCenter(1),100,30,50,"KEYS");
 
+// carros iniciais do jogo
 const traffic=[
     new Car(road.getLaneCenter(1),-100,30,50,"DUMMY",2,getRandomColor()),
     new Car(road.getLaneCenter(0),-300,30,50,"DUMMY",2,getRandomColor()),
     new Car(road.getLaneCenter(2),-300,30,50,"DUMMY",2,getRandomColor()),
     new Car(road.getLaneCenter(0),-500,30,50,"DUMMY",2,getRandomColor()),
     new Car(road.getLaneCenter(1),-500,30,50,"DUMMY",2,getRandomColor()),
-    // new Car(road.getLaneCenter(1),-700,30,50,"DUMMY",2,getRandomColor()),
-    // new Car(road.getLaneCenter(2),-700,30,50,"DUMMY",2,getRandomColor()),
 ];
 
+// animacao do jogo
 animate();
 
 function animate(time){
@@ -39,7 +41,7 @@ function animate(time){
     // every second, add a new traffic car
     if(time%1000 < 20){
         if(car.damaged == false){
-            crateRandomCar();
+            crateRandomCar(); // add um novo carro no jogo
         }
     }
 
@@ -67,6 +69,7 @@ function animate(time){
     requestAnimationFrame(animate);
 }
 
+// cria um novo carro aleatorio no jogo
 function crateRandomCar(){
     // get a random lane
     const lane=Math.floor(Math.random()*3);

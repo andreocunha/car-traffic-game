@@ -1,10 +1,12 @@
 class Car{
     constructor(x,y,width,height,controlType,maxSpeed=3,color="blue"){
+        // dimensoes do carro
         this.x=x;
         this.y=y;
         this.width=width;
         this.height=height;
 
+        // fisica do carro
         this.speed=0;
         this.acceleration=0.2;
         this.maxSpeed=maxSpeed;
@@ -12,8 +14,10 @@ class Car{
         this.angle=0;
         this.damaged=false;
 
+        // controles do carro
         this.controls=new Controls(controlType);
 
+        // imagem do carro
         this.img=new Image();
         this.img.src="car.png"
 
@@ -32,13 +36,14 @@ class Car{
         }
     }
 
-    // a function that run every second and update the max speed
+    // funcao para atualizar a velocidade do carro
     updateMaxSpeed(increment){
         if(this.maxSpeed < 10){
             this.maxSpeed += increment;
         }
     }
 
+    // atualiza a posicao do carro
     update(roadBorders,traffic){
         if(!this.damaged){
             this.#move();
@@ -47,6 +52,7 @@ class Car{
         }
     }
 
+    // funcao privada para verificar se o carro esta colidindo com outro
     #assessDamage(roadBorders,traffic){
         for(let i=0;i<roadBorders.length;i++){
             if(polysIntersect(this.polygon,roadBorders[i])){
@@ -61,6 +67,7 @@ class Car{
         return false;
     }
 
+    // cria o formato do poligono do carro
     #createPolygon(){
         const points=[];
         const rad=Math.hypot(this.width,this.height)/2;
@@ -84,6 +91,7 @@ class Car{
         return points;
     }
 
+    // funcao para mover o carro dependendo do teclado
     #move(){
         if(this.controls.forward){
             this.speed+=this.acceleration;
@@ -123,6 +131,7 @@ class Car{
         this.y-=Math.cos(this.angle)*this.speed;
     }
 
+    // funcao para desenhar o carro
     draw(ctx){
         ctx.save();
         ctx.translate(this.x,this.y);
